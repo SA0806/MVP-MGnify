@@ -15,7 +15,7 @@ export async function generateComponent(design) {
   try {
     const result = await fetcher()
 
-    // ✅ Handle API error
+    // Handle API error
     if (!result || result.error) {
       console.error("API Error:", result?.error)
       return {
@@ -29,7 +29,7 @@ export async function generateComponent(design) {
       ? { next: result.next, prev: result.prev }
       : null
 
-    // ✅ Ensure valid array
+    // Ensure valid array
     if (!Array.isArray(data)) {
       console.error("Invalid data format:", data)
       return {
@@ -38,14 +38,14 @@ export async function generateComponent(design) {
       }
     }
 
-    // ✅ Validate fields
+    // Validate fields
     design.columns.forEach(col => {
       if (!isValidField(schema, col.field)) {
         console.warn(`Invalid field: ${col.field}`)
       }
     })
 
-    // ✅ Component selection
+    // Component selection
     if (design.component === "table") {
       return {
         component: Table,
