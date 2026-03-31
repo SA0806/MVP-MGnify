@@ -1,0 +1,11 @@
+{
+  "study": "// Standard MGnify study fetch hook\nimport useSWR from 'swr';\nimport { fetcher } from '@/utils/api';\n\nexport function useStudy(accession) {\n  const { data, error, isLoading } = useSWR(\n    accession ? `/studies/${accession}` : null,\n    fetcher\n  );\n  return {\n    study: data?.data?.attributes,\n    accession: data?.data?.id,\n    isLoading,\n    error,\n  };\n}",
+
+  "studies": "// Standard MGnify studies list hook with cursor pagination\nimport useSWR from 'swr';\nimport { useState } from 'react';\nimport { fetcher } from '@/utils/api';\n\nexport function useStudies() {\n  const [pageUrl, setPageUrl] = useState('/studies');\n  const { data, error, isLoading } = useSWR(pageUrl, fetcher);\n  return {\n    studies: data?.data ?? [],\n    isLoading,\n    error,\n    hasNext: !!data?.links?.next,\n    hasPrev: !!data?.links?.prev,\n    goNext: () => data?.links?.next && setPageUrl(data.links.next),\n    goPrev: () => data?.links?.prev && setPageUrl(data.links.prev),\n  };\n}",
+
+  "sample": "// Standard MGnify sample fetch hook\nimport useSWR from 'swr';\nimport { fetcher } from '@/utils/api';\n\nexport function useSample(accession) {\n  const { data, error, isLoading } = useSWR(\n    accession ? `/samples/${accession}` : null,\n    fetcher\n  );\n  return {\n    sample: data?.data?.attributes,\n    isLoading,\n    error,\n  };\n}",
+
+  "analysis": "// Standard MGnify analysis fetch hook\nimport useSWR from 'swr';\nimport { fetcher } from '@/utils/api';\n\nexport function useAnalysis(accession) {\n  const { data, error, isLoading } = useSWR(\n    accession ? `/analyses/${accession}` : null,\n    fetcher\n  );\n  return {\n    analysis: data?.data?.attributes,\n    isLoading,\n    error,\n  };\n}",
+
+  "default": "// Generic MGnify resource fetch hook\nimport useSWR from 'swr';\nimport { fetcher } from '@/utils/api';\n\nexport function useResource(endpoint) {\n  const { data, error, isLoading } = useSWR(endpoint, fetcher);\n  return {\n    data: data?.data,\n    isLoading,\n    error,\n  };\n}"
+}

@@ -1,0 +1,116 @@
+{
+  "resource": "analyses",
+  "savedAt": "2026-03-29T11:45:11.054Z",
+  "schema": {
+    "type": "string",
+    "id": "string",
+    "attributes": {
+      "analysis-summary": [
+        {
+          "key": "string",
+          "value": "string"
+        }
+      ],
+      "analysis-status": "string",
+      "experiment-type": "string",
+      "accession": "string",
+      "pipeline-version": "string",
+      "is-private": "boolean",
+      "last-update": "string",
+      "mgx-accession": "null",
+      "complete-time": "string",
+      "instrument-platform": "string",
+      "instrument-model": "string"
+    },
+    "relationships": {
+      "taxonomy": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "go-slim": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "study": {
+        "data": {
+          "type": "string",
+          "id": "string"
+        },
+        "links": {
+          "related": "string"
+        }
+      },
+      "assembly": {
+        "data": "null"
+      },
+      "run": {
+        "data": {
+          "type": "string",
+          "id": "string"
+        },
+        "links": {
+          "related": "string"
+        }
+      },
+      "go-terms": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "antismash-gene-clusters": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "taxonomy-ssu": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "taxonomy-lsu": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "downloads": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "interpro-identifiers": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "genome-properties": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "taxonomy-itsunite": {
+        "links": {
+          "related": "string"
+        }
+      },
+      "sample": {
+        "data": {
+          "type": "string",
+          "id": "string"
+        },
+        "links": {
+          "related": "string"
+        }
+      },
+      "taxonomy-itsonedb": {
+        "links": {
+          "related": "string"
+        }
+      }
+    },
+    "links": {
+      "self": "string"
+    }
+  }
+}

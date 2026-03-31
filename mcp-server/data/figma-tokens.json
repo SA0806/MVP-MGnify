@@ -1,0 +1,84 @@
+{
+  "colors": {
+    "primary": "#2c7bb6",
+    "secondary": "#5aae61",
+    "surface": "#f8f9fa",
+    "border": "#dee2e6",
+    "text-primary": "#212529",
+    "text-muted": "#6c757d",
+    "error": "#dc3545",
+    "success": "#28a745"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "xxl": "48px"
+  },
+  "typography": {
+    "heading-1": { "size": "2rem", "weight": 600, "lineHeight": 1.2 },
+    "heading-2": { "size": "1.5rem", "weight": 600, "lineHeight": 1.3 },
+    "heading-3": { "size": "1.25rem", "weight": 500, "lineHeight": 1.4 },
+    "body": { "size": "1rem", "weight": 400, "lineHeight": 1.6 },
+    "caption": { "size": "0.875rem", "weight": 400, "lineHeight": 1.5 },
+    "label": { "size": "0.75rem", "weight": 500, "lineHeight": 1.4 }
+  },
+  "borders": {
+    "radius": "8px",
+    "width": "1px",
+    "color": "#dee2e6"
+  },
+  "components": {
+    "StudyCard": {
+      "description": "Card for displaying a single MGnify study in a list or grid",
+      "layout": "vertical",
+      "padding": "md",
+      "border": "1px solid border",
+      "borderRadius": "8px",
+      "props": ["accession", "title", "abstract", "samplesCount", "biome", "lastUpdate"],
+      "variants": ["compact", "full"],
+      "tokens": {
+        "background": "surface",
+        "titleFont": "heading-3",
+        "bodyFont": "body",
+        "captionFont": "caption"
+      }
+    },
+    "MetadataPanel": {
+      "description": "Two-column grid for displaying key-value metadata fields",
+      "layout": "grid-2-col",
+      "padding": "md",
+      "props": ["fields"],
+      "fieldShape": { "label": "string", "value": "string" },
+      "tokens": {
+        "labelFont": "label",
+        "valueFont": "body",
+        "labelColor": "text-muted"
+      }
+    },
+    "DataTable": {
+      "description": "Full-width paginated table for list resources",
+      "layout": "full-width",
+      "props": ["columns", "data", "isLoading", "error", "onNextPage", "onPrevPage"],
+      "columnShape": { "label": "string", "field": "string" },
+      "features": ["client-pagination", "loading-state", "error-state", "empty-state"],
+      "tokens": {
+        "headerBackground": "surface",
+        "borderColor": "border",
+        "bodyFont": "caption"
+      }
+    },
+    "PageHeader": {
+      "description": "Page-level header with title, accession badge, and subtitle",
+      "layout": "horizontal",
+      "props": ["title", "accession", "subtitle"],
+      "tokens": {
+        "titleFont": "heading-1",
+        "subtitleFont": "body",
+        "subtitleColor": "text-muted"
+      }
+    }
+  }
+}

@@ -1,8 +1,3 @@
-// server/server.js
-// MGnify MCP PoC — Express backend
-// Demonstrates: live API proxying, schema extraction, LLM-driven column generation,
-// robust fallback chain, and session-level caching
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -32,8 +27,6 @@ function setCached(key, data) {
 }
 
 // ── Schema extractor (proposal Section 4.4: compact typed representation) ──
-// Returns field names mapped to types — not raw data.
-// This is what get_endpoint_schema() MCP tool will produce.
 function extractSchema(data, depth = 0) {
   if (depth > 3) return typeof data;
   if (Array.isArray(data)) return [extractSchema(data[0], depth + 1)];
@@ -112,7 +105,7 @@ app.get("/studies", async (req, res) => {
 
 // ── Schema endpoint (exposes compact schema to frontend) ──────────
 // This simulates what get_endpoint_schema() MCP tool returns.
-// The frontend uses this to give the LLM accurate field context.
+
 app.get("/schema/studies", async (req, res) => {
   try {
     const cached = getCached("schema:studies");
@@ -174,18 +167,22 @@ User prompt: ${prompt}
 `;
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: systemPrompt }] }],
-        }),
-      }
-    );
-
-    const data = await response.json();
+    // Replace Gemini call in server.js with:
+const response = await fetch("https://api.anthropic.com/v1/messages", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-api-key": process.env.ANTHROPIC_API_KEY,
+    "anthropic-version": "2023-06-01"
+  },
+  body: JSON.stringify({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1000,
+    messages: [{ role: "user", content: systemPrompt }]
+  })
+});
+const data = await response.json();
+const text = data.content[0].text;
 
     // Guard: LLM API error
     if (data.error) {
@@ -199,10 +196,7 @@ User prompt: ${prompt}
       return res.json(fallbackDesign());
     }
 
-    let text = data.candidates[0]?.content?.parts
-      ?.map((p) => p.text || "")
-      .join("")
-      .trim();
+  
 
     // Guard: empty response
     if (!text || text.length < 10) {
@@ -241,7 +235,7 @@ User prompt: ${prompt}
 });
 
 // ── Fallback design (used when LLM fails at any stage) ───────────
-// Proposal Section 4.5: human control is preserved — system degrades
+// Proposal Section 4.5: human control is preserved - system degrades
 // gracefully rather than crashing or generating invalid output.
 function fallbackDesign() {
   return {

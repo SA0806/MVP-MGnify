@@ -1,0 +1,10 @@
+{
+  "name": "mgnify-mcp-poc",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test:tools": "node scripts/test-tools.js",
+    "drift:check":   "node scripts/detect-drift.js",
+  "drift:save":    "node scripts/detect-drift.js --save"
+  }
+}

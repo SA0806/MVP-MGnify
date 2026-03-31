@@ -1,9 +1,0 @@
-{
-  "component": "table",
-  "resource": "studies",
-  "columns": [
-    { "label": "Study ID", "field": "id" },
-    { "label": "Biome", "field": "relationships.biomes.data.0.id" }
-  ]
-}
-
